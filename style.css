@@ -1,0 +1,18 @@
+.black {
+  background-color: black;
+}
+#container {
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(16, 1fr);
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+}
+#reset {
+  display: block;
+  margin: 0 auto;
+  /* text-align: center; */
+  background-color: #fff;
+}
