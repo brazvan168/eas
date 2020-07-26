@@ -2,15 +2,20 @@
 <html lang="en">
   <head>
     <link href="style.css" type="text/css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch-A-Sketch</title>
   </head>
   <body>
+    <h1>Etch-A-Sketch!</h1>
     <div id="btn-container">
-      <div>
+      <div id="btn">
         <button id="reset" class="buttons">Reset</button>
-        <button id="random" class="buttons">Random Colors</button>
+        <button id="random" class="buttons">Random</button>
         <button id="spray" class="buttons">Spray</button>
       </div>
     </div>
@@ -31,13 +36,13 @@
         currentNumber = number;
         container.setAttribute(
           "style",
-          `border:1px solid black;display:grid; grid-template-columns:repeat(${number},1fr); grid-template-rows:repeat(${number},1fr);width:500px;height:500px;margin:10px auto 0;`
+          `border:display:grid; grid-template-columns:repeat(${number},1fr); grid-template-rows:repeat(${number},1fr);width:500px;height:500px;margin:10px auto 0;`
         );
 
         div.classList.add("squares");
         div.setAttribute(
           "style",
-          "border:1px solid red;width:100%;height:100%;"
+          "border:2px solid black;width:100%;height:100%;"
         );
 
         for (let i = 0; i < number; i++) {
@@ -50,7 +55,7 @@
           if (state === "spray")
             square.setAttribute(
               "style",
-              "border:1px solid red;width:100%;height:100%;background-color:rgb(255,255,255);"
+              "border:2px solid black;width:100%;height:100%;background-color:rgb(255,255,255);"
             );
           square.addEventListener("mouseover", () => {
             if (state === "black") toBlack(square);
