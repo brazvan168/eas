@@ -11,6 +11,7 @@
       <div>
         <button id="reset" class="buttons">Reset</button>
         <button id="random" class="buttons">Random Colors</button>
+        <button id="spray" class="buttons">Spray</button>
       </div>
     </div>
     <div id="container"></div>
@@ -20,6 +21,7 @@
       const reset = document.querySelector("#reset");
       const div = document.createElement("div");
       const random = document.querySelector("#random");
+      const spray = document.querySelector("#spray");
       let state = "black";
 
       let currentNumber = 16;
@@ -37,25 +39,40 @@
           "style",
           "border:1px solid red;width:100%;height:100%;"
         );
+
         for (let i = 0; i < number; i++) {
           for (let j = 0; j < number; j++)
             container.appendChild(div.cloneNode(true));
         }
+
         let squares = document.querySelectorAll(".squares");
         squares.forEach((square) => {
+          if (state === "spray")
+            square.setAttribute(
+              "style",
+              "border:1px solid red;width:100%;height:100%;background-color:rgb(255,255,255);"
+            );
           square.addEventListener("mouseover", () => {
             if (state === "black") toBlack(square);
             else if (state === "random") toRandom(square);
+            else if (state === "spray") toSpray(square);
           });
         });
       }
 
       function toBlack(elem) {
-        elem.classList.add("black");
+        elem.style.backgroundColor = "black";
         state = "black";
       }
+
       function toRandom(elem) {
         elem.style.backgroundColor = getRandomColor(0, 255);
+        state = "random";
+      }
+
+      function toSpray(elem) {
+        elem.style.backgroundColor = getDarkerColor(elem.style.backgroundColor);
+        state = "spray";
       }
 
       function getRandomColor(min, max) {
@@ -63,6 +80,23 @@
         let b = Math.floor(Math.random() * (max - min + 1)) + min;
         let c = Math.floor(Math.random() * (max - min + 1)) + min;
         return `rgb(${a},${b},${c})`;
+      }
+
+      function getDarkerColor(currentColor) {
+        let darkerColor;
+        let r, g, b;
+        if (currentColor.length >= 18) {
+          r = currentColor.slice(4, 7);
+          g = currentColor.slice(9, 12);
+          b = currentColor.slice(14, 17);
+        } else {
+          r = currentColor.slice(4, 6);
+          g = currentColor.slice(8, 10);
+          b = currentColor.slice(12, 14);
+        }
+        if (r >= 26) darkerColor = `rgb(${r - 26},${g - 26},${b - 26})`;
+        else darkerColor = "rgb(0,0,0)";
+        return darkerColor;
       }
 
       reset.addEventListener("click", () => {
@@ -78,6 +112,14 @@
 
       random.addEventListener("click", () => {
         state = "random";
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+        createGrid(currentNumber);
+      });
+
+      spray.addEventListener("click", () => {
+        state = "spray";
         while (container.firstChild) {
           container.removeChild(container.firstChild);
         }
