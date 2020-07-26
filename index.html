@@ -7,13 +7,20 @@
     <title>Etch-A-Sketch</title>
   </head>
   <body>
-    <button id="reset">Reset</button>
+    <div id="btn-container">
+      <div>
+        <button id="reset" class="buttons">Reset</button>
+        <button id="random" class="buttons">Random Colors</button>
+      </div>
+    </div>
     <div id="container"></div>
     <script>
       "use strict";
       const container = document.querySelector("#container");
       const reset = document.querySelector("#reset");
       const div = document.createElement("div");
+      const random = document.querySelector("#random");
+      let state = "black";
 
       let currentNumber = 16;
       createGrid(16);
@@ -37,14 +44,22 @@
         let squares = document.querySelectorAll(".squares");
         squares.forEach((square) => {
           square.addEventListener("mouseover", () => {
-            toBlack(square);
+            if (state === "black") toBlack(square);
+            else if (state === "random") toRandom(square);
           });
         });
       }
+
       function toBlack(elem) {
         elem.classList.add("black");
+        state = "black";
       }
+      function toRandom(elem) {
+        elem.style.backgroundColor = getRandomColor(0, 255);
+      }
+
       reset.addEventListener("click", () => {
+        state = "black";
         let gridNumber = prompt("Enter the number of squares:", 16);
         if (gridNumber != null) {
           while (container.firstChild) {
@@ -53,6 +68,21 @@
           createGrid(gridNumber);
         }
       });
+
+      random.addEventListener("click", () => {
+        state = "random";
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+        createGrid(currentNumber);
+      });
+
+      function getRandomColor(min, max) {
+        let a = Math.floor(Math.random() * (max - min + 1)) + min;
+        let b = Math.floor(Math.random() * (max - min + 1)) + min;
+        let c = Math.floor(Math.random() * (max - min + 1)) + min;
+        return `rgb(${a},${b},${c})`;
+      }
     </script>
   </body>
 </html>
