@@ -8,11 +8,11 @@
   grid-template-rows: repeat(16, 1fr);
   width: 500px;
   height: 500px;
-  margin: 0 auto;
+  margin: 200px auto 0;
 }
 #reset {
   display: block;
-  margin: 0 auto;
+  margin: 130px auto 0;
   /* text-align: center; */
   background-color: #fff;
 }

@@ -7,7 +7,7 @@
     <title>Etch-A-Sketch</title>
   </head>
   <body>
-    <button id="reset">Reset</button><br />
+    <button id="reset">Reset</button>
     <div id="container"></div>
     <script>
       "use strict";
@@ -22,7 +22,7 @@
         currentNumber = number;
         container.setAttribute(
           "style",
-          `border:1px solid black;display:grid; grid-template-columns:repeat(${number},1fr); grid-template-rows:repeat(${number},1fr);width:500px;height:500px;margin:0 auto;`
+          `border:1px solid black;display:grid; grid-template-columns:repeat(${number},1fr); grid-template-rows:repeat(${number},1fr);width:500px;height:500px;margin:10px auto 0;`
         );
 
         div.classList.add("squares");
@@ -45,17 +45,12 @@
         elem.classList.add("black");
       }
       reset.addEventListener("click", () => {
-        let gridNumber = prompt("Enter the number of squares:");
+        let gridNumber = prompt("Enter the number of squares:", 16);
         if (gridNumber != null) {
           while (container.firstChild) {
             container.removeChild(container.firstChild);
           }
           createGrid(gridNumber);
-        } else {
-          while (container.firstChild) {
-            container.removeChild(container.firstChild);
-          }
-          createGrid(currentNumber);
         }
       });
     </script>
