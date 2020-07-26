@@ -58,10 +58,17 @@
         elem.style.backgroundColor = getRandomColor(0, 255);
       }
 
+      function getRandomColor(min, max) {
+        let a = Math.floor(Math.random() * (max - min + 1)) + min;
+        let b = Math.floor(Math.random() * (max - min + 1)) + min;
+        let c = Math.floor(Math.random() * (max - min + 1)) + min;
+        return `rgb(${a},${b},${c})`;
+      }
+
       reset.addEventListener("click", () => {
-        state = "black";
         let gridNumber = prompt("Enter the number of squares:", 16);
         if (gridNumber != null) {
+          state = "black";
           while (container.firstChild) {
             container.removeChild(container.firstChild);
           }
@@ -76,13 +83,6 @@
         }
         createGrid(currentNumber);
       });
-
-      function getRandomColor(min, max) {
-        let a = Math.floor(Math.random() * (max - min + 1)) + min;
-        let b = Math.floor(Math.random() * (max - min + 1)) + min;
-        let c = Math.floor(Math.random() * (max - min + 1)) + min;
-        return `rgb(${a},${b},${c})`;
-      }
     </script>
   </body>
 </html>
