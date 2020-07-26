@@ -14,7 +14,8 @@ h1 {
   grid-template-rows: repeat(16, 1fr);
   width: 500px;
   height: 500px;
-  margin: 200px auto 0;
+  margin: 25px auto 0;
+  box-shadow: 0 0 30px #4d4d4d;
 }
 #btn-container {
   margin: 0 auto;
